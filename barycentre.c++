@@ -20,3 +20,16 @@ vector<float> barycentric_coord(Point P, vector<Point>& Trig){
 	return lambda;
 	
 }
+
+int test_triangle(Point P, vector<Point>& Trig){
+	//test if point P is on the triangle Trig 
+	// 1 : in the triangle 
+	// 0 : not in the triangle
+	vector<float> lambda = barycentric_coord(P,Trig);
+	int t = 0
+	for(int i = 0; i<3;i++){
+		if(lambda[i]>0 && lambda[i] < 1){t = 1;}
+		else{t = 0;}
+	}
+	return t;
+}
