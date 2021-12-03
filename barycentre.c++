@@ -1,5 +1,6 @@
 #include "point.h"
 #include <iostream>
+#include <vector>
 using namespace std;
 
 float det(Point A, Point B)
@@ -26,10 +27,10 @@ int test_triangle(Point P, vector<Point>& Trig){
 	// 1 : in the triangle 
 	// 0 : not in the triangle
 	vector<float> lambda = barycentric_coord(P,Trig);
-	int t = 0
+	int t = 0;
 	for(int i = 0; i<3;i++){
-		if(lambda[i]>0 && lambda[i] < 1){t = 1;}
-		else{t = 0;}
+		if(lambda[i]>0 && lambda[i] < 1){t++;}
 	}
-	return t;
+	if(t==3){return 1;}
+	else{return 0;}
 }
