@@ -9,6 +9,11 @@ float det(Point A, Point B)
 	return A[0]*B[1]-A[1]*B[0];
 }
 
+
+/*
+	/!\ arriver à faire un jeu d'indice tel que le vector d'entrée contienne 3 Points /!\ 
+*/
+
 vector<float> barycentric_coord(Point P, vector<Point>& Trig){
 	// return point P's barycentrics coordinates on triangle (Trig[0] Trig[1] Trig[2])
 	
