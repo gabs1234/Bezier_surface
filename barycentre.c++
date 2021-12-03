@@ -9,7 +9,7 @@ float det(Point A, Point B)
 }
 
 vector<float> barycentric_coord(Point P, vector<Point>& Trig){
-	// return point P's barycentric coordinates
+	// return point P's barycentrics coordinates on triangle (Trig[0] Trig[1] Trig[2])
 	
 	vector<float> lambda(3);
 	
