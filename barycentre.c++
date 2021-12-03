@@ -5,7 +5,7 @@ using namespace std;
 
 float det(Point A, Point B)
 {
-	// return det(A,B)
+	// returns det(A,B)
 	return A[0]*B[1]-A[1]*B[0];
 }
 
@@ -15,7 +15,7 @@ float det(Point A, Point B)
 */
 
 vector<float> barycentric_coord(Point P, vector<Point>& Trig){
-	// return point P's barycentrics coordinates on triangle (Trig[0] Trig[1] Trig[2])
+	// returns point P's barycentrics coordinates on triangle (Trig[0] Trig[1] Trig[2])
 	
 	vector<float> lambda(3);
 	
@@ -28,7 +28,7 @@ vector<float> barycentric_coord(Point P, vector<Point>& Trig){
 }
 
 int test_triangle(Point P, vector<Point>& Trig){
-	//test if point P is on the triangle Trig 
+	//tests if point P is on the triangle Trig 
 	// 1 : in the triangle 
 	// 0 : not in the triangle
 	vector<float> lambda = barycentric_coord(P,Trig);
