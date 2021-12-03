@@ -9,6 +9,7 @@ TODO:
 		convert into barycentric points according to macro-triangle
 		if in triangle: find center of mass, and calculate coefficients of the 3 sub triangles
 
+HELLLO MOTHERFUCKER
 */
 
 int main(int argc, char const *argv[]) {
