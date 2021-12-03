@@ -12,6 +12,7 @@ public :
 	float distance () const;
     bool operator<(const Point&) const;
     	float operator[](int n);
+	Point operator-(Point&);
 private :
 	float xP, yP;
 	static Point PointRef;
