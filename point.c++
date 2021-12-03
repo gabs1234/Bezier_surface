@@ -49,3 +49,10 @@ try {
 		cerr << chaine << endl;
 	}
 }
+Point Point::operator-(Point B)
+{
+Point C;
+C.xP = xP-B.xP;
+C.yP = yP-B.yP;
+return C;
+}
