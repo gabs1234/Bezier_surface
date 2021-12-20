@@ -3,6 +3,7 @@
 */
 
 #include "DataIO.hpp"
+#include "Point.hpp"
 
 using namespace std;
 

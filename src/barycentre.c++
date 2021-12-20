@@ -3,8 +3,7 @@
 #include <vector>
 using namespace std;
 
-float det(Point A, Point B)
-{
+float det(Point A, Point B){
 	// returns det(A,B)
 	return A[0]*B[1]-A[1]*B[0];
 }
