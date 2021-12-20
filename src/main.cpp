@@ -18,14 +18,13 @@ int main(int argc, char const *argv[]) {
 	// Load initial control point data that we wish to interpolate
 	auto control_points = readData<float>("../data/hctr.pts", 2);
 	// Load triangulation data
-	vector<vector<int>> triangulation_data = readData<int>("../data/hctr.tri", 32, 3);
+	auto triangulation_data = readData<int>("../data/hctr.tri", 32, 3);
 	
 	// Convert triangulation data to an array of triangle objects
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);
 
-	int triangle_id = findTriangle(.2, .6, triangulation);
+	int triangle_id = findTriangle(1, .6, triangulation);
 
-	cout << triangle_id << endl;
 
 	return 0;
 }
