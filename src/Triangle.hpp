@@ -20,5 +20,8 @@ public:
 	// find subtriangle
 	int getSubTriangle( Point& p, int number);
 
+	int getId();
+	void print();
+
 	Point operator [] (int n);
 };

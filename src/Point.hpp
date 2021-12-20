@@ -13,6 +13,8 @@ private:
 public:
 	Point();
 	Point(float x, float y);
+	Point(std::vector<float> point);
+
 	void print() const;
 	void translate(float x, float y);
 	bool ok();

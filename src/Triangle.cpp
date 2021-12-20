@@ -9,7 +9,7 @@
 using namespace std;
 
 /* Constructors */
-Triangle::Triangle(vector<Point> init_points, int id) : id(id), vertices(3), w(3){
+Triangle::Triangle(vector<Point> init_points, int id) : id(id), vertices(init_points), w(3){
 	assert( init_points.size() == 3 );
 }
 
@@ -17,7 +17,6 @@ Triangle::Triangle(Point p1, Point p2, Point p3, int id) : id(id), vertices(3), 
 	vertices[0] = p1;
 	vertices[1] = p2;
 	vertices[2] = p3;
-
 }
 
 /* Public member functions */
@@ -30,6 +29,18 @@ bool Triangle::containsPoint(Point& p){
 		}
 	}
 	return true;
+}
+
+int Triangle::getId(){
+	return id;
+}
+
+void Triangle::print(){
+	cout << "[ " << endl;
+	for( auto point : vertices ){
+		point.print();
+	}
+	cout << "]" << endl;
 }
 
 /* Operator overloads */

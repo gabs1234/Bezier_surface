@@ -14,6 +14,11 @@ Point::Point(float x, float y){
 	assert(ok());
 }
 
+Point::Point(vector<float> point){
+	xP=point[0]; yP=point[1];
+	assert(ok());
+}
+
 /* Private member functions */
 float Point::det(Point A, Point B){
 	// returns det(A,B)
