@@ -1,4 +1,6 @@
 #include "DataIO.hpp"
+#include "Point.hpp"
+#include "Triangle.hpp"
 #include <iostream>
 
 using namespace std;
@@ -12,11 +14,18 @@ TODO:
 */
 
 int main(int argc, char const *argv[]) {
-	// Load initial control points that we wish to interpolate
+	// Load initial control point data that we wish to interpolate
 	auto control_points = readData<float>("../data/hctr.pts", 2);
-	// Load triangulation
+	// Load triangulation data
 	auto triangulation_data = readData<int>("../data/hctr.tri", 32, 3);
 
-	
+	vector<Triangle> triangulation( triangulation_data.size() );
+
+	for( auto triangle_id : triangulation_data ){
+		for( int point_id : triangle_id ){
+			
+		}
+	}
+
 	return 0;
 }

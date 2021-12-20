@@ -34,59 +34,39 @@ bool Point::ok(){
 	return xP>=0. && yP>=0.;
 }
 
-Point Point::getBarycentric( Triangle trig ){
-	Point lambda;
 
-	lambda[0] = det(P-Trig[1],P-Trig[2])/det(Trig[0]-Trig[1],Trig[0]-Trig[2]);
-	lambda[1] = det(P-Trig[2],P-Trig[0])/det(Trig[1]-Trig[2],Trig[1]-Trig[0]);
-	lambda[2] = det(P-Trig[0],P-Trig[1])/det(Trig[2]-Trig[0],Trig[2]-Trig[1]);
+vector<float> Point::getBarycentric( Triangle Trig ){
+	vector<float> lambda(3);
+
+	Point t_P0 = Trig[0], t_P1 = Trig[1], t_P2 = Trig[2];
+
+	lambda[0] = det((*this)-t_P1, (*this)-t_P2)/det(t_P0-t_P1, t_P0-t_P2);
+	lambda[1] = det((*this)-t_P2, (*this)-t_P0)/det(t_P1-t_P2, t_P1-t_P0);
+	lambda[2] = det((*this)-t_P0, (*this)-t_P1)/det(t_P2-t_P0, t_P2-t_P1);
 
 	return lambda;
 }
 
 /* Operator overloads */
 float Point::operator[](int n){
-	try{
-		if(n==0){return xP;}
-		if(n==1){return yP;}
-		else{throw string("erreur indice");}
-	}
-	catch( string const& chaine ){
-		cerr << chaine << endl;
-	}
+	if(n==0){return xP;}
+	if(n==1){return yP;}
+	else{throw string("erreur indice");}
 }
 
 bool Point::operator<(const Point& P) const {
-	return distance() < P.distance();
-}
-
-bool Point::operator<(const float& scalar) const {
-	for( int i = 0; i < 2; i++ ){
-		if( (*this)[i] > scalar ){
-			return false;
-		}
-	}
-	return true;
-}
-
-bool Point::operator<(const float& scalar, const Point& rightPoint) const {
-	for( int i = 0; i < 2; i++ ){
-		if( rightPoint[i] > scalar ){
-			return false;
-		}
-	}
-	return true;
+	return 0;
 }
 
 
-Point Point::operator+(Point B){
+Point Point::operator+(Point& B){
 	Point C;
 	C.xP = xP+B.xP;
 	C.yP = yP+B.yP;
 	return C;
 }
 
-Point Point::operator-(Point B){
+Point Point::operator-(Point& B){
 	Point C;
 	C.xP = xP-B.xP;
 	C.yP = yP-B.yP;
