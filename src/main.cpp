@@ -31,6 +31,7 @@ int main(int argc, char const *argv[]) {
 	auto X = readData<float>("../data/X.msh",31,31); // 
 	auto Y = readData<float>("../data/X.msh",31,31); // 
 	
+	vector<Points> res;
 	// initiate variables 
 	
 	int id // as the triangle's id
@@ -48,7 +49,12 @@ int main(int argc, char const *argv[]) {
 		for(int j = 0; j < 31; j++)
 			{
 			Point P(X[i][j],Y[i][j]);
-			id = findTriangle(P, triangulation)
+			id_triangle = findTriangle(P, triangulation)
+			coefs(id_triangle, a, b, c, d, e, p, q, g, u, f, dxf, dyf);
+			id = id_triangle.getid();
+			//subtriangle function to make
+			
+			res[i][j] = computeInterpolation(id,lambda[3], a, b, c, d, e, p, q, g, u)
 			}
 		}
 }
