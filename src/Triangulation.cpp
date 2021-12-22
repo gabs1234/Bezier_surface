@@ -26,7 +26,7 @@ vector<Triangle> toTriangles(vector<vector<int>> triangulation_data, vector<vect
 	return triangulation;
 }
 
-int findTriangle(Point p, vector<Triangle> triangulation){
+Triangle findTriangle(Point p, vector<Triangle> triangulation){
 	for( auto triangle : triangulation ){
 		if( triangle.containsPoint(p) ){
 			prev_trig_id = curr_trig_id;
@@ -38,7 +38,7 @@ int findTriangle(Point p, vector<Triangle> triangulation){
 				return -2;
 			}
 
-			return curr_trig_id;
+			return triangle
 		}
 	}
 	// error not found
@@ -46,7 +46,7 @@ int findTriangle(Point p, vector<Triangle> triangulation){
 	return -1;
 }
 
-int findTriangle(float x, float y, vector<Triangle> triangulation){
+Triangle findTriangle(float x, float y, vector<Triangle> triangulation){
 	Point p(x, y);
 	for( auto triangle : triangulation ){
 		if( triangle.containsPoint(p) ){
@@ -60,7 +60,7 @@ int findTriangle(float x, float y, vector<Triangle> triangulation){
 				return -2;
 			}
 
-			return curr_trig_id;
+			return triangle;
 		}
 	}
 	// error not found
@@ -68,7 +68,7 @@ int findTriangle(float x, float y, vector<Triangle> triangulation){
 	return -1;
 }
 
-int findTriangle(vector<float> vecP, vector<Triangle> triangulation){
+Triangle findTriangle(vector<float> vecP, vector<Triangle> triangulation){
 	Point p(vecP);
 	for( auto triangle : triangulation ){
 		if( triangle.containsPoint(p) ){
@@ -81,7 +81,7 @@ int findTriangle(vector<float> vecP, vector<Triangle> triangulation){
 				return -2;
 			}
 
-			return curr_trig_id;
+			return triangle;
 		}
 	}
 	// error not found
