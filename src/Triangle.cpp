@@ -17,6 +17,8 @@ Triangle::Triangle(Point p1, Point p2, Point p3, int id) : id(id), vertices(3), 
 	vertices[0] = p1;
 	vertices[1] = p2;
 	vertices[2] = p3;
+
+	
 }
 
 /* Public member functions */
