@@ -39,7 +39,7 @@ int main(int argc, char const *argv[]) {
 	// coef
 	
 	float a[3], b[3], c[3], d[3], e[3];
-	
+	vector<float> lambda(3);
 	// functions 
 	float p,q; // /!\ to define 
 	float f,g , dfx, dyf;
@@ -53,8 +53,8 @@ int main(int argc, char const *argv[]) {
 			coefs(id_triangle, a, b, c, d, e, p, q, g, u, f, dxf, dyf);
 			id = id_triangle.getid();
 			//subtriangle function to make
-			
-			res[i][j] = computeInterpolation(id,lambda[3], a, b, c, d, e, p, q, g, u)
+			lambda = barycentric_coord(P, id_triangle)
+			res[i][j] = computeInterpolation(id,lambda, a, b, c, d, e, p, q, g) u)
 			}
 		}
 }

@@ -82,7 +82,7 @@ with p, q that interpolate the function f;
 }
 		
 		
-double computeInterpolation(int id, double lambda[3], float *a, float *b, float *c, float *d, float *e, float *p, float *q, float *g, float *u)
+double computeInterpolation(int id, vector<float> lambda, float *a, float *b, float *c, float *d, float *e, float *p, float *q, float *g, float *u)
 {
     double w = (e[0] + e[1] + e[2]) / 3;
 
