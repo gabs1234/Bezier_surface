@@ -9,19 +9,40 @@
 using namespace std;
 
 /* Constructors */
-Triangle::Triangle(vector<Point> init_points, int id) : id(id), vertices(init_points), w(3){
+Triangle::Triangle(vector<Point> init_points, int id) : id(id), vertices(init_points){
 	assert( init_points.size() == 3 );
 }
 
-Triangle::Triangle(Point p1, Point p2, Point p3, int id) : id(id), vertices(3), w(3){
+Triangle::Triangle(Point p1, Point p2, Point p3, int id) : id(id), vertices(3){
 	vertices[0] = p1;
 	vertices[1] = p2;
-	vertices[2] = p3;
-
-	
+	vertices[2] = p3;	
 }
 
 /* Public member functions */
+Point Triangle::getCOG(){
+	Point COG;
+	for( auto point : vertices ){
+		COG = COG + point;
+	}
+	return COG/3;
+}
+vector<Triangle> Triangle::getMicroTriangles(){
+	Point COG = getCOG();
+	vector<Triangle> mic_triangles;
+
+	int j, k;
+
+	for( int i = 0; i < 3; i++ ){
+		j = (i + 1) % 3;
+        k = (i + 2) % 3;
+		Triangle MicroTriangle(COG, vertices[j], vertices[k], i);
+		mic_triangles.push_back(MicroTriangle);
+    }
+
+	return mic_triangles;
+}
+
 bool Triangle::containsPoint(Point& p){
 	vector<float> baryCoords = p.getBarycentric( (*this) );
 
@@ -31,6 +52,17 @@ bool Triangle::containsPoint(Point& p){
 		}
 	}
 	return true;
+}
+
+Triangle Triangle::findMicroTriangle(Point& p){
+	vector<Triangle> mic_triangles = getMicroTriangles();
+
+	for( auto triangle : mic_triangles ){
+		if( triangle.containsPoint(p) ){
+			return triangle;
+		}
+	}
+
 }
 
 int Triangle::getId(){

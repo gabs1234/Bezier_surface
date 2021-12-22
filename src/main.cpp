@@ -24,10 +24,7 @@ int main(int argc, char const *argv[]) {
 	// Convert triangulation data to an array of triangle objects
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);
 
-	int triangle_id = findTriangle(1, .6, triangulation);
-	
 	// load meshgrid
-	
 	auto X = readData<float>("../data/X.msh",31,31); // 
 	auto Y = readData<float>("../data/X.msh",31,31); // 
 	
@@ -35,7 +32,7 @@ int main(int argc, char const *argv[]) {
 	// initiate variables 
 	
 	int id // as the triangle's id
-	triangle id_triangle. 
+	Triangle id_triangle. 
 	// coef
 	
 	float a[3], b[3], c[3], d[3], e[3];
@@ -44,17 +41,16 @@ int main(int argc, char const *argv[]) {
 	float p,q; // /!\ to define 
 	float f,g , dfx, dyf;
 	
-	for(int i = 0; i < 31; i ++)
-		{
-		for(int j = 0; j < 31; j++)
-			{
+	for( int i = 0; i < 31; i++ ){
+		for( int j = 0; j < 31; j++ ){
 			Point P(X[i][j],Y[i][j]);
 			id_triangle = findTriangle(P, triangulation)
 			coefs(id_triangle, a, b, c, d, e, p, q, g, u, f, dxf, dyf);
 			id = id_triangle.getid();
 			//subtriangle function to make
-			lambda = barycentric_coord(P, id_triangle)
+			Triangle sub_triangle = id_triangle.findMicroTriangle(P);
+			lambda = P.getBarycentric(id_triangle);
 			res[i][j] = computeInterpolation(id,lambda, a, b, c, d, e, p, q, g) u)
-			}
 		}
+	}
 }

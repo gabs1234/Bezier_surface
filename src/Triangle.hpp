@@ -10,18 +10,20 @@ private:
 	const int id;
 	int edges[3];
 	std::vector<Point> vertices;
-	std::vector<float> w;
-
-	Triangle micro_triangle[3];
 
 public:
 	Triangle(std::vector< Point > init_points, int id);
 	Triangle(Point p1, Point p2, Point p3, int id);
 
+	// Returns the center of gravity of current triangle
+	Point getCOG();
+	// Returns the three microTriangles of the current triangles
+	std::vector<Triangle> getMicroTriangles();
+
 	// Test if point is in global triangle
-	bool containsPoint( Point& p );
+	bool containsPoint(Point& p);
 	// find subtriangle
-	int getSubTriangle( Point& p, int number);
+	Triangle findMicroTriangle(Point& p);
 
 	int getId();
 	void print();

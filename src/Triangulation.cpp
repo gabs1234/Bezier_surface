@@ -35,15 +35,13 @@ Triangle findTriangle(Point p, vector<Triangle> triangulation){
 			if( prev_trig_id == curr_trig_id ){
 				// Signal that there is no need to recopute the coefficients
 				cout << "Same triangle!" << endl;
-				return -2;
+				return triangle;
 			}
 
-			return triangle
+			return triangle;
 		}
 	}
-	// error not found
-	cerr << "error not found" << endl;
-	return -1;
+	throw("error: triangle not found");
 }
 
 Triangle findTriangle(float x, float y, vector<Triangle> triangulation){
@@ -57,15 +55,13 @@ Triangle findTriangle(float x, float y, vector<Triangle> triangulation){
 			if( prev_trig_id == curr_trig_id ){
 				// Signal that there is no need to recopute the coefficients
 				cout << "Same triangle!" << endl;
-				return -2;
+				return triangle;
 			}
 
 			return triangle;
 		}
 	}
-	// error not found
-	cerr << "error not found" << endl;
-	return -1;
+	throw("error: triangle not found");
 }
 
 Triangle findTriangle(vector<float> vecP, vector<Triangle> triangulation){
@@ -78,13 +74,11 @@ Triangle findTriangle(vector<float> vecP, vector<Triangle> triangulation){
 			if( prev_trig_id == curr_trig_id ){
 				// Signal that there is no need to recopute the coefficients
 				cout << "Same triangle!" << endl;
-				return -2;
+				return triangle;
 			}
 
 			return triangle;
 		}
 	}
-	// error not found
-	cerr << "error not found" << endl;
-	return -1;
+	throw("error: triangle not found");
 }

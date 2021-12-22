@@ -77,3 +77,11 @@ Point Point::operator-(Point& B){
 	C.yP = yP-B.yP;
 	return C;
 }
+
+Point Point::operator/(float C){
+	Point D;
+	D.xP = xP/C;
+	D.yP = yP/C;
+	return D;
+}
+

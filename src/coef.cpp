@@ -86,7 +86,7 @@ double computeInterpolation(int id, vector<float> lambda, float *a, float *b, fl
 {
     double w = (e[0] + e[1] + e[2]) / 3;
 
-    int i = id - 1;
+    int i = id;
     int j = (i + 1) % 3;
     int k = (i + 2) % 3;
 
