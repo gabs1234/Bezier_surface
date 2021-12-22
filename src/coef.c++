@@ -82,15 +82,18 @@ with p, q that interpolate the function f;
 }
 		
 		
-		
-		
-		
-		
-		
-		
+double computeInterpolation(int id, double lambda[3],, float *a, float *b, float *c, float *d, float *e, float *p, float *q, float *g, float *u)
+{
+    double w = (e[0] + e[1] + e[2]) / 3;
 
+    int i = id - 1;
+    int j = (i + 1) % 3;
+    int k = (i + 2) % 3;
 
-
-
-
+    double S = a[k] * lambda[2] * lambda[2] * lambda[2] + a[j] * lambda[1] * lambda[1] * lambda[1] +
+               b[j] * 3 * lambda[1] * lambda[1] * lambda[2] + c[k] * 3 * lambda[1] * lambda[2] * lambda[2] +
+               d[j] * 3 * lambda[0] * lambda[1] * lambda[1] + d[k] * 3 * lambda[0] * lambda[2] * lambda[2] +
+               e[j] * 3 * lambda[0] * lambda[0] * lambda[1] + e[k] * 3 * lambda[0] * lambda[0] * lambda[2] +
+               g[i] * 6 * lambda[0] * lambda[1] * lambda[2] + w * lambda[0] * lambda[0] * lambda[0];
+    return S;
 }
