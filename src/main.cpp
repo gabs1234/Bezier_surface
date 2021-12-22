@@ -19,6 +19,7 @@ int main(int argc, char const *argv[]) {
 	auto control_points = readData<float>("../data/hctr.pts", 2);
 	// Load triangulation data
 	auto triangulation_data = readData<int>("../data/hctr.tri", 32, 3);
+
 	
 	// Convert triangulation data to an array of triangle objects
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);

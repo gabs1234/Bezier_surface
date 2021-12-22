@@ -8,8 +8,11 @@ class Triangle;
 class Triangle {
 private:
 	const int id;
+	int edges[3];
 	std::vector<Point> vertices;
 	std::vector<float> w;
+
+	Triangle micro_triangle[3];
 
 public:
 	Triangle(std::vector< Point > init_points, int id);

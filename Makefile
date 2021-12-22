@@ -1,2 +1,6 @@
-main: ./src/main.cpp ./src/data.cpp ./src/data.hpp
-	@g++ ./src/main.cpp ./src/data.cpp -o ./bin/main
+SRC = $(src/wildcard *.cpp)
+
+LDFLAGS = -lm
+
+main: $(SRC)
+	@$(CC) $(SRC) -o ./bin/main
