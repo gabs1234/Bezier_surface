@@ -27,6 +27,7 @@ public:
     bool operator < (const Point& P) const;
 	Point operator - (Point& B);
 	Point operator + (Point& B);
+	float operator * (Point& B);
 	Point operator / (float C);
 };
 

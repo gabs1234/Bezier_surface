@@ -11,9 +11,9 @@ std::vector< std::vector <T> > readData(const std::string filename, int cols);
 template <class T>
 std::vector< std::vector <T> > readData(std::string filename, int cols, int rows);
 
-// // Write
-// template <class T>
-// void writeData(string filename, std::vector< std::vector <T> > data);
+// Write
+template <class T>
+void writeData(std::vector< std::vector <T> > data, std::string fileName);
 
 // Utilities
 template <class T>

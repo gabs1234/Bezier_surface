@@ -62,7 +62,8 @@ Triangle Triangle::findMicroTriangle(Point& p){
 			return triangle;
 		}
 	}
-
+	// TMP
+	return mic_triangles[0];
 }
 
 int Triangle::getId(){
