@@ -2,10 +2,6 @@
 
 using namespace std;
 
-int prev_trig_id = 0;
-int curr_trig_id = -1;
-
-
 vector<Triangle> toTriangles(vector<vector<int>> triangulation_data, vector<vector<float>> control_points){
 	vector<Triangle> triangulation;
 	int id = 0;
@@ -29,16 +25,7 @@ vector<Triangle> toTriangles(vector<vector<int>> triangulation_data, vector<vect
 Triangle findTriangle(Point p, vector<Triangle> triangulation){
 	for( auto triangle : triangulation ){
 		if( triangle.containsPoint(p) ){
-			prev_trig_id = curr_trig_id;
-			curr_trig_id = triangle.getId();
-
-			if( prev_trig_id == curr_trig_id ){
-				// Signal that there is no need to recopute the coefficients
-				cout << "Same triangle!" << endl;
 				return triangle;
-			}
-
-			return triangle;
 		}
 	}
 	throw("error: triangle not found");
@@ -48,16 +35,6 @@ Triangle findTriangle(float x, float y, vector<Triangle> triangulation){
 	Point p(x, y);
 	for( auto triangle : triangulation ){
 		if( triangle.containsPoint(p) ){
-			
-			prev_trig_id = curr_trig_id;
-			curr_trig_id = triangle.getId();
-
-			if( prev_trig_id == curr_trig_id ){
-				// Signal that there is no need to recopute the coefficients
-				cout << "Same triangle!" << endl;
-				return triangle;
-			}
-
 			return triangle;
 		}
 	}
@@ -68,15 +45,6 @@ Triangle findTriangle(vector<float> vecP, vector<Triangle> triangulation){
 	Point p(vecP);
 	for( auto triangle : triangulation ){
 		if( triangle.containsPoint(p) ){
-			prev_trig_id = curr_trig_id;
-			curr_trig_id = triangle.getId();
-
-			if( prev_trig_id == curr_trig_id ){
-				// Signal that there is no need to recopute the coefficients
-				cout << "Same triangle!" << endl;
-				return triangle;
-			}
-
 			return triangle;
 		}
 	}
