@@ -12,6 +12,7 @@ private:
 	std::vector<Point> vertices;
 
 public:
+	Triangle();
 	Triangle(std::vector< Point > init_points, int id);
 	Triangle(Point p1, Point p2, Point p3, int id);
 

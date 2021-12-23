@@ -2,17 +2,26 @@
 #include "Point.hpp"
 #include "Triangle.hpp"
 #include "Triangulation.hpp"
+#include "Coef.hpp"
+
+#include <cmath>
+
 #include <iostream>
 
 using namespace std;
-/*
-TODO:
 
-for each grid point:
-	convert into barycentric points according to macro-triangle
-	if in triangle: find center of mass, and calculate coefficients of the 3 sub triangles
 
-*/
+float f(Point P){
+	return exp(P[0]+P[1]);	
+}
+
+float dxf(Point P){
+	return exp(P[0]+P[1]);	
+}
+
+float dyf(Point P){
+	return exp(P[0]+P[1]);	
+}
 
 int main(int argc, char const *argv[]) {
 	// Load initial control point data that we wish to interpolate
@@ -20,37 +29,36 @@ int main(int argc, char const *argv[]) {
 	// Load triangulation data
 	auto triangulation_data = readData<int>("../data/hctr.tri", 32, 3);
 
-	
 	// Convert triangulation data to an array of triangle objects
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);
 
+	int lines = 31, columns = 31;
 	// load meshgrid
-	auto X = readData<float>("../data/X.msh",31,31); // 
-	auto Y = readData<float>("../data/X.msh",31,31); // 
+	auto X = readData<float>("../data/X.msh",lines,columns);
+	auto Y = readData<float>("../data/X.msh",lines,columns);
 	
-	vector<Points> res;
-	// initiate variables 
+	vector<vector<float>> res( lines , std::vector<float> (columns));
 	
-	int id // as the triangle's id
-	Triangle id_triangle. 
-	// coef
-	
-	float a[3], b[3], c[3], d[3], e[3];
+	int id;
+
+	Coefficients coef; 
 	vector<float> lambda(3);
-	// functions 
-	float p,q; // /!\ to define 
-	float f,g , dfx, dyf;
 	
 	for( int i = 0; i < 31; i++ ){
 		for( int j = 0; j < 31; j++ ){
-			Point P(X[i][j],Y[i][j]);
-			id_triangle = findTriangle(P, triangulation)
-			coefs(id_triangle, a, b, c, d, e, p, q, g, u, f, dxf, dyf);
-			id = id_triangle.getid();
-			//subtriangle function to make
-			Triangle sub_triangle = id_triangle.findMicroTriangle(P);
-			lambda = P.getBarycentric(id_triangle);
-			res[i][j] = computeInterpolation(id,lambda, a, b, c, d, e, p, q, g) u)
+			Point P(X[i][j], Y[i][j]);
+
+			Triangle macro_triangle = findTriangle(P, triangulation);
+			Triangle micro_triangle = macro_triangle.findMicroTriangle(P);
+
+			calcCoefficient(macro_triangle, coef, f, dxf, dyf);
+
+			lambda = P.getBarycentric(micro_triangle);
+			id = micro_triangle.getId();
+
+			res[i][j] = computeInterpolation(id, lambda, coef);
 		}
 	}
+
+	writeData(res, "RES.dat");
 }

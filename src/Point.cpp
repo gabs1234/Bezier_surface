@@ -78,6 +78,10 @@ Point Point::operator-(Point& B){
 	return C;
 }
 
+float Point::operator*(Point& B){
+	return xP * B.xP + yP * B.yP;
+}
+
 Point Point::operator/(float C){
 	Point D;
 	D.xP = xP/C;
