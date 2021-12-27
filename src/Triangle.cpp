@@ -27,6 +27,7 @@ Point Triangle::getCOG(){
 	}
 	return COG/3;
 }
+
 vector<Triangle> Triangle::getMicroTriangles(){
 	Point COG = getCOG();
 	vector<Triangle> mic_triangles;
@@ -47,10 +48,11 @@ bool Triangle::containsPoint(Point& p){
 	vector<float> baryCoords = p.getBarycentric( (*this) );
 
 	for( auto xi : baryCoords ){
-		if( (0 > xi) || (xi > 1) ){
+		if( (-0.0000001 >= xi) ){
 			return false;
 		}
 	}
+
 	return true;
 }
 
@@ -62,7 +64,9 @@ Triangle Triangle::findMicroTriangle(Point& p){
 			return triangle;
 		}
 	}
-	// TMP
+
+	// temp
+	throw("Error: micro triangle not found!");
 	return mic_triangles[0];
 }
 
@@ -80,10 +84,6 @@ void Triangle::print(){
 
 /* Operator overloads */
 Point Triangle::operator[](int n){
-
-	if(n==0){return vertices[0];}
-	else if(n==1){return vertices[1];}
-	else if(n==2){return vertices[2];}
-	else{throw string("erreur indice");}
-
+	assert( (0 <= n) && (n < 3) );
+	return vertices[n];
 }

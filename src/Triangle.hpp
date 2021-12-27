@@ -7,7 +7,7 @@ class Triangle;
 
 class Triangle {
 private:
-	const int id;
+	int id;
 	int edges[3];
 	std::vector<Point> vertices;
 

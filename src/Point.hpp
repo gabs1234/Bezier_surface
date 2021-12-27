@@ -11,6 +11,7 @@ private:
 	float det(Point A, Point B);
 	
 public:
+	int id;
 	Point();
 	Point(float x, float y);
 	Point(std::vector<float> point);
@@ -24,7 +25,6 @@ public:
 
 	// Operator overloads
 	float operator [] (int n);
-    bool operator < (const Point& P) const;
 	Point operator - (Point& B);
 	Point operator + (Point& B);
 	float operator * (Point& B);

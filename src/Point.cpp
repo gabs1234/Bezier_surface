@@ -7,21 +7,18 @@
 using namespace std;
 
 /* Constructors */
-Point::Point():xP(0), yP(0){assert(ok());}
+Point::Point():xP(0), yP(0){}
 
 Point::Point(float x, float y){
 	xP=x; yP=y;
-	assert(ok());
 }
 
 Point::Point(vector<float> point){
 	xP=point[0]; yP=point[1];
-	assert(ok());
 }
 
 /* Private member functions */
 float Point::det(Point A, Point B){
-	// returns det(A,B)
 	return A[0]*B[1]-A[1]*B[0];
 }
 
@@ -32,22 +29,28 @@ void Point::print(void) const {
 
 void Point::translate(float x, float y) {
 	xP+=x; yP+=y;
-	assert( ok() );
-}
-
-bool Point::ok(){
-	return xP>=0. && yP>=0.;
 }
 
 
 vector<float> Point::getBarycentric( Triangle Trig ){
 	vector<float> lambda(3);
 
-	Point t_P0 = Trig[0], t_P1 = Trig[1], t_P2 = Trig[2];
 
-	lambda[0] = det((*this)-t_P1, (*this)-t_P2)/det(t_P0-t_P1, t_P0-t_P2);
-	lambda[1] = det((*this)-t_P2, (*this)-t_P0)/det(t_P1-t_P2, t_P1-t_P0);
-	lambda[2] = det((*this)-t_P0, (*this)-t_P1)/det(t_P2-t_P0, t_P2-t_P1);
+	// lambda[0] = ((A2[1] - A3[1])*(xP - A3[0]) + (A3[0] - A2[0])*(yP - A3[1]))/d;
+	// lambda[1] = ((A3[1] - A1[1])*(xP - A3[0]) + (A1[0] - A3[0])*(yP - A3[1]))/d;
+	// lambda[2] = 1 - lambda[0] - lambda[1];
+
+	int j, k;
+
+	for( int i = 0; i < 3; i++ ){
+		j = (i + 1) % 3;
+        k = (j + 1) % 3;
+		Point Ai = Trig[i];
+		Point Aj = Trig[j];
+		Point Ak = Trig[k];
+
+		lambda[i] = det( Ak - Aj, (*this) - Aj )/det( Ak - Aj, Ai - Aj );
+	}
 
 	return lambda;
 }
@@ -56,13 +59,10 @@ vector<float> Point::getBarycentric( Triangle Trig ){
 float Point::operator[](int n){
 	if(n==0){return xP;}
 	if(n==1){return yP;}
-	else{throw string("erreur indice");}
+	else{
+		cout << "hello" << endl;
+		throw string("erreur indice");}
 }
-
-bool Point::operator<(const Point& P) const {
-	return 0;
-}
-
 
 Point Point::operator+(Point& B){
 	Point C;

@@ -20,5 +20,6 @@ struct Coefficients {
 
 typedef float (*func)(Point);
 
-void calcCoefficient(Triangle& triangle, Coefficients& coef, func f, func dxf, func dyf);
+void calcCoefficient(Triangle& triangle, std::vector<float> f, std::vector<float> dxf, std::vector<float> dyf, Coefficients& coef);
 float computeInterpolation(int id, std::vector<float> lambda, Coefficients coef);
+std::vector<float> evaluateFunction(func f, std::vector<std::vector<float>> control_points);
