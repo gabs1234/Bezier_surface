@@ -8,14 +8,11 @@ using namespace std;
 
 /* Constructors */
 Point::Point():xP(0), yP(0){}
+Point::Point(float x, float y):xP(x), yP(y){}
+Point::Point(float x, float y, int id):xP(x), yP(y), id(id){}
+Point::Point(vector<float> point):xP(point[0]), yP(point[1]){}
+Point::Point(vector<float> point, int id):xP(point[0]), yP(point[1]), id(id){}
 
-Point::Point(float x, float y){
-	xP=x; yP=y;
-}
-
-Point::Point(vector<float> point){
-	xP=point[0]; yP=point[1];
-}
 
 /* Private member functions */
 float Point::det(Point A, Point B){
@@ -27,15 +24,10 @@ void Point::print(void) const {
 	cout << "x=\t" << xP << ", \t y=\t" << yP << endl;
 }
 
-void Point::translate(float x, float y) {
-	xP+=x; yP+=y;
-}
-
-
 vector<float> Point::getBarycentric( Triangle Trig ){
 	vector<float> lambda(3);
 
-
+	// // This solution is more efficient
 	// lambda[0] = ((A2[1] - A3[1])*(xP - A3[0]) + (A3[0] - A2[0])*(yP - A3[1]))/d;
 	// lambda[1] = ((A3[1] - A1[1])*(xP - A3[0]) + (A1[0] - A3[0])*(yP - A3[1]))/d;
 	// lambda[2] = 1 - lambda[0] - lambda[1];
