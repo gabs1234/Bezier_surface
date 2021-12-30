@@ -2,14 +2,14 @@ clear all;
 
 # Load control points and make triangulation
 raw_points = importdata("data/hctr.pts");
-nb_lines = raw_points(1,1);
-points = raw_points(2:nb_lines, :);
+nb_lines = raw_points(1,1)+1;
+points = raw_points(2:nb_lines, :)
 
 trig = delaunay(points);
 dlmwrite ("data/hctr.tri", trig, "delimiter", " ", "newline", "\n")
 
-#figure(1)
-#triplot(trig, points(:,1), points(:, 2))
+figure(1)
+triplot(trig, points(:,1), points(:, 2))
 
 # Make mesh grid
 xmin = min(points(:,1));
