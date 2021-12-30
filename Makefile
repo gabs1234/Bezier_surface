@@ -1,6 +1,8 @@
-SRC = $(src/wildcard *.cpp)
+SRC := $(wildcard src/*.cpp)
+HEADERS := $(wildcard src/*.hpp)
 
-LDFLAGS = -lm
+OUTPUT := bin/main
+LDFLAGS := -lm
 
-main: $(SRC)
-	@$(CC) $(SRC) -o ./bin/main
+main: $(SRC) $(HEADERS)
+	@g++ $(SRC) -o $(OUTPUT) $(LDFLAGS)

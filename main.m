@@ -6,7 +6,7 @@ nb_lines = raw_points(1,1);
 points = raw_points(2:nb_lines, :);
 
 trig = delaunay(points);
-save("data/hgtr.tri",  "trig" ) ;
+dlmwrite ("data/hctr.tri", trig, "delimiter", " ", "newline", "\n")
 
 #figure(1)
 #triplot(trig, points(:,1), points(:, 2))
@@ -31,20 +31,21 @@ save "data/X.msh"  "X"  -ascii;
 save "data/Y.msh" "Y"  -ascii;
 
 # Run c++ program
+command = sprintf("./launch.sh %d %d %d", size(trig)(1),  x_points+1, y_points+1)
+system(command);
 
 # Import solution
-res = importdata('data/TEST.dat');
-size(X)
-size(Y)
-size(res)
+res = importdata('data/plot.dat');
 
+# Evaluate exact solution
 res_sol = exp(X + Y);
 
+
+# Plot results
 figure(2)
 subplot(1, 3, 1);
 surf(X, Y, res_sol);
 subplot(1, 3, 2);
 surf(X, Y, res);
-scatter3(points);
 subplot(1, 3, 3);
 surf(X, Y, res-res_sol);

@@ -27,26 +27,34 @@ float dyTestFunction(Point p){
 
 
 int main(int argc, char const *argv[]) {
+	if( argc != 4 ){
+		cerr << "usage: main nb_triangles nx_mesh ny_mesh" << endl;
+		return 1;
+	}
+	int nb_triangles = stoi(argv[1]);
+	int lines = stoi(argv[2]);
+	int columns = stoi(argv[3]);
+	
 	// Input filenames
-	string ctrl_points = "../data/hctr.pts";
-	string triangle_points = "../data/hctr.tri";
-	string X_mesh = "../data/X.msh";
-	string Y_mesh = "../data/Y.msh";
+	string ctrl_points = "data/hctr.pts";
+	string triangle_points = "data/hctr.tri";
+	string X_mesh = "data/X.msh";
+	string Y_mesh = "data/Y.msh";
 
 	// Output filenames
-	string htc_res = "../data/HCT.res";
-	string plot_file = "../data/plot.dat";
+	string htc_res = "data/HCT.res";
+	string plot_file = "data/plot.dat";
 
 	// Load initial control point data that we wish to interpolate
 	auto control_points = readData<float>(ctrl_points, 2);
 	// Load triangulation data
-	auto triangulation_data = readData<int>(triangle_points, 32, 3);
+	auto triangulation_data = readData<int>(triangle_points, nb_triangles, 3);
 
 	// Convert triangulation data to an array of triangle objects
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);
 
 	// load meshgrid
-	int lines = 20, columns = 20;
+	
 	auto X = readData<float>(X_mesh,lines,columns);
 	auto Y = readData<float>(Y_mesh,lines,columns);
 

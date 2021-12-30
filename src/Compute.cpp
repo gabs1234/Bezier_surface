@@ -123,8 +123,6 @@ vector<vector<float>> getSol(func f, vector<vector<float>> X, vector<vector<floa
 	int lines = X.size();
 	int columns = X[0].size();
 
-	cout << lines << " " << columns << endl;
-
 	for( int i = 0; i < lines; i++ ){
 		for( int j = 0; j < columns; j++ ){
 			Point P(X[i][j], Y[i][j]);
