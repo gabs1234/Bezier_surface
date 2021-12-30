@@ -27,18 +27,28 @@ float dyTestFunction(Point p){
 
 
 int main(int argc, char const *argv[]) {
+	// Input filenames
+	string ctrl_points = "../data/hctr.pts";
+	string triangle_points = "../data/hctr.tri";
+	string X_mesh = "../data/X.msh";
+	string Y_mesh = "../data/Y.msh";
+
+	// Output filenames
+	string htc_res = "../data/HCT.res";
+	string plot_file = "../data/plot.dat";
+
 	// Load initial control point data that we wish to interpolate
-	auto control_points = readData<float>("../data/hctr.pts", 2);
+	auto control_points = readData<float>(ctrl_points, 2);
 	// Load triangulation data
-	auto triangulation_data = readData<int>("../data/hctr.tri", 32, 3);
+	auto triangulation_data = readData<int>(triangle_points, 32, 3);
 
 	// Convert triangulation data to an array of triangle objects
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);
 
 	// load meshgrid
 	int lines = 20, columns = 20;
-	auto X = readData<float>("../data/X.msh",lines,columns);
-	auto Y = readData<float>("../data/Y.msh",lines,columns);
+	auto X = readData<float>(X_mesh,lines,columns);
+	auto Y = readData<float>(Y_mesh,lines,columns);
 
 	// Get list of values of function
 	vector<float> f_points =   evaluateFunction(TestFunction, control_points);
@@ -79,6 +89,6 @@ int main(int argc, char const *argv[]) {
 
 	vector<vector<float>> res_sol = getSol(TestFunction, X, Y);
 
-	writeData(res, "../data/TEST.dat");
-	makeRES(triangulation, control_points, f_points, dxf_points, dyf_points, res, res_sol, "../data/HCT.res");
+	writeData(res, plot_file);
+	makeRES(triangulation, control_points, f_points, dxf_points, dyf_points, res, res_sol, htc_res);
 }
