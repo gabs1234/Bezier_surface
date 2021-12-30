@@ -3,6 +3,7 @@
 #include "Point.hpp"
 #include "Triangle.hpp"
 #include <vector>
+#include <algorithm>
 
 #include <cmath>
 
@@ -23,3 +24,6 @@ typedef float (*func)(Point);
 void calcCoefficient(Triangle& triangle, std::vector<float> f, std::vector<float> dxf, std::vector<float> dyf, Coefficients& coef);
 float computeInterpolation(int id, std::vector<float> lambda, Coefficients coef);
 std::vector<float> evaluateFunction(func f, std::vector<std::vector<float>> control_points);
+std::vector<std::vector<float>> getSol(func f, std::vector<std::vector<float>> X, std::vector<std::vector<float>> Y);
+float getMin(std::vector<std::vector<float>> sol);
+float getMax(std::vector<std::vector<float>> sol);

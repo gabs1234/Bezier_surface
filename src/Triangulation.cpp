@@ -4,20 +4,21 @@ using namespace std;
 
 vector<Triangle> toTriangles(vector<vector<int>> triangulation_data, vector<vector<float>> control_points){
 	vector<Triangle> triangulation;
-	int id = 0;
+	int trig_id = 0;
+	int point_id = 0;
 
-	for( auto triangle_id : triangulation_data ){
-		vector<Point> tmp_trig;
+	for( auto vertex_id : triangulation_data ){
+		vector<Point> tmp_trig(3);
 
-		for( int point_id : triangle_id ){
-			Point tmp_point( control_points[point_id-1] );
-			tmp_point.id = point_id-1;
-			tmp_trig.push_back(tmp_point);
+		for( int i = 0; i < 3; i++ ){
+			point_id = vertex_id[i] - 1;
+			Point tmp_point( control_points[point_id], point_id );
+			tmp_trig[i] = tmp_point;
 		}
 
-		Triangle tmp(tmp_trig, id);
-		triangulation.push_back( tmp );
-		id++;
+		Triangle trig = Triangle(tmp_trig, trig_id, vertex_id);
+		triangulation.push_back(trig);
+		trig_id++;
 	}
 
 	return triangulation;
@@ -29,7 +30,6 @@ Triangle findTriangle(Point p, vector<Triangle> triangulation){
 			return triangle;
 		}
 	}
-	cout << "the w" << endl;
 	throw("error: triangle not found");
 }
 
@@ -40,7 +40,6 @@ Triangle findTriangle(float x, float y, vector<Triangle> triangulation){
 			return triangle;
 		}
 	}
-	cout << "the" << endl;
 	throw("error: triangle not found");
 }
 
@@ -51,6 +50,5 @@ Triangle findTriangle(vector<float> vecP, vector<Triangle> triangulation){
 			return triangle;
 		}
 	}
-	cout << "the" << endl;
 	throw("error: triangle not found");
 }

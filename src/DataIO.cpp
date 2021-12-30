@@ -1,9 +1,6 @@
-/* TODO:
- - Exception handling
-*/
-
 #include "DataIO.hpp"
 #include "Point.hpp"
+#include "Compute.hpp"
 
 using namespace std;
 
@@ -80,6 +77,7 @@ void writeData(vector<vector <T>> data, std::string fileName){
 
 	data_file.close();
 }
+
 template <class T>
 void printData(std::vector< std::vector <T> > data){
 	for( auto row : data ){
@@ -105,3 +103,53 @@ template void  writeData<int>(vector<vector<int>>data, std::string fileName);
 template void printData<float>(std::vector< std::vector <float> > data);
 template void printData<int>(std::vector< std::vector <int> > data);
 
+void makeRES(vector<Triangle> triangulation, 
+			 vector<vector<float>> control_points, 
+			 vector<float> f_points, 
+			 vector<float> dxf_points, 
+			 vector<float> dyf_points,
+			 vector<vector<float>> res,
+			 vector<vector<float>> res_sol,
+			 string fileName)
+{
+	ofstream data_file(fileName);
+
+	try{
+	// Print triangle info
+	for( auto triangle : triangulation ){
+		data_file << triangle.getId() << "\t";
+		for( int i = 0; i < 3; i++ ){
+			data_file << triangle[i].getId() << "\t";
+		}
+		data_file << endl;
+	}
+
+	// Print Point info
+	for( int i = 0; i < control_points.size(); i++ ){
+		data_file << i << "\t";
+		data_file << control_points[i][0] << "  ";
+		data_file << control_points[i][1] << "\t";
+		data_file << f_points[i] << "  ";
+		data_file << dxf_points[i] << "  ";
+		data_file << dyf_points[i] << endl;
+	}
+
+	// Process error
+	int l = res.size(), c = res[0].size();
+	vector<vector<float>> err( l, vector<float>(c) );
+	for( int i = 0; i < l; i++ ){
+		for( int j = 0; j < c; j++ ){
+			err[i][j] = res[i][j] - res_sol[i][j];
+		}
+	}
+
+	// Print min and max of error
+	float min = getMin(err);
+	float max = getMax(err);
+	data_file << min << "\t" << max << endl;
+	}
+	catch( std::ofstream::failure e ){
+		cerr << "Exception writing HCT.res file" << endl;
+	}
+	
+}

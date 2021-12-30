@@ -1,8 +1,5 @@
 #pragma once
 
-class Point;
-
-#include "Triangle.hpp"
 #include <vector>
 
 class Point {
@@ -22,10 +19,11 @@ public:
 	Point(std::vector<float> point);
 	Point(std::vector<float> point, int id);
 
-	void print() const;
-
 	// return barycentric coordinates according to trig
-	std::vector<float> getBarycentric( Triangle trig );
+	std::vector<float> getBarycentric( std::vector<Point> points);
+
+	int getId() const;
+	void print() const;
 
 	// Operator overloads
 	float operator [] (int n);
