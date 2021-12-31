@@ -139,7 +139,7 @@ void makeRES(vector<Triangle> triangulation,
 	vector<vector<float>> err( l, vector<float>(c) );
 	for( int i = 0; i < l; i++ ){
 		for( int j = 0; j < c; j++ ){
-			err[i][j] = res[i][j] - res_sol[i][j];
+			err[i][j] = res_sol[i][j] - res[i][j];
 		}
 	}
 

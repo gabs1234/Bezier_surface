@@ -42,21 +42,21 @@ void calcCoefficient(Triangle& triangle, vector<float> f, vector<float> dxf, vec
 	for( int i = 0; i < 3; i++ ){
 		j = (i + 1) % 3;
 		k = (i + 2) % 3;
-		coef.b[j] = (coef.a[j] + coef.p[j]) /3.0;
+		coef.b[j] = coef.a[j] + coef.p[j]/3.0;
 	}
 	
 	// c 
 	for( int i = 0; i < 3; i++ ){
 		j = (i + 1) % 3;
 		k = (i + 2) % 3;
-		coef.c[k] = (coef.a[k] +  coef.q[k]) /3.0;
+		coef.c[k] = coef.a[k] +  coef.q[k]/3.0;
 	}
 	
 	// d
 	for( int i = 0; i < 3; i++ ){
 		j = (i + 1) % 3;
 		k = (i + 2) % 3;
-		coef.d[k] = (coef.a[k] + coef.b[k] + coef.c[k]) /3.0;
+		coef.d[k] = (coef.a[k] + coef.b[k] + coef.c[k])/3.0;
 	}
 	
 	// u

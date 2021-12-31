@@ -12,17 +12,17 @@ using namespace std;
 
 float TestFunction(Point p){
 	// SET FUNCTION HERE
-	return f(p);
+	return g(p);
 }
 
 float dxTestFunction(Point p){
 	// SET dx FUNCTION HERE
-	return f(p);
+	return dxg(p);
 }
 
 float dyTestFunction(Point p){
 	// SET dy FUNCTION HERE
-	return f(p);
+	return dyg(p);
 }
 
 
@@ -32,8 +32,8 @@ int main(int argc, char const *argv[]) {
 		return 1;
 	}
 	int nb_triangles = stoi(argv[1]);
-	int lines = stoi(argv[2]);
-	int columns = stoi(argv[3]);
+	int columns = stoi(argv[2]);
+	int lines = stoi(argv[3]);
 	
 	// Input filenames
 	string ctrl_points = "data/hctr.pts";
@@ -43,7 +43,9 @@ int main(int argc, char const *argv[]) {
 
 	// Output filenames
 	string htc_res = "data/HCT.res";
-	string plot_file = "data/plot.dat";
+	string plot_res = "data/plot_res.dat";
+	string plot_res_sol = "data/plot_res_sol.dat";
+
 
 	// Load initial control point data that we wish to interpolate
 	auto control_points = readData<float>(ctrl_points, 2);
@@ -54,7 +56,6 @@ int main(int argc, char const *argv[]) {
 	vector<Triangle> triangulation = toTriangles(triangulation_data, control_points);
 
 	// load meshgrid
-	
 	auto X = readData<float>(X_mesh,lines,columns);
 	auto Y = readData<float>(Y_mesh,lines,columns);
 
@@ -70,9 +71,12 @@ int main(int argc, char const *argv[]) {
 	int next_id = 0;
 	Coefficients coef; 
 	vector<float> lambda(3);
+	int counter = 0;
 	
-	for( int i = 0; i < lines; i++ ){
-		for( int j = 0; j < columns; j++ ){		
+	for( int j = 0; j < columns; j++ ){
+		for( int i = 0; i < lines; i++ ){
+
+			counter++;	
 			Point P(X[i][j], Y[i][j]);
 			// Find triangle in triangulation that contains P
 			Triangle macro_triangle = findTriangle(P, triangulation);
@@ -97,6 +101,9 @@ int main(int argc, char const *argv[]) {
 
 	vector<vector<float>> res_sol = getSol(TestFunction, X, Y);
 
-	writeData(res, plot_file);
+	// Write interpolation result to file
+	writeData(res, plot_res);
+	// Write exact solution to file
+	writeData(res_sol, plot_res_sol);
 	makeRES(triangulation, control_points, f_points, dxf_points, dyf_points, res, res_sol, htc_res);
 }
