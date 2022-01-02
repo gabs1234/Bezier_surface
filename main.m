@@ -7,6 +7,7 @@ nb_lines = raw_points(1,1)+1;
 points = raw_points(2:nb_lines, :)
 
 trig = delaunay(points);
+dlmwrite ("data/hctr.tri", trig, "delimiter", " ", "newline", "\n");
 
 figure(1)
 triplot(trig, points(:,1), points(:, 2))
@@ -62,4 +63,5 @@ ylabel("y");
 zlabel("res sol - res");
 
 # Save figures
+print(1,"-S2000,900", "triangulation.png");
 print(2,"-S2000,900", "surface2.png");

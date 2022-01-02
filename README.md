@@ -33,7 +33,7 @@ To obtain all results, simply run the main Matlab/Octave script `main.m`.
 If you wish to run the C++ code on it's own, run
 
 ```bash
-	./launch.sh
+	./launch.sh <nb_triangles> <res_x> <res_y>
 ```
 
 ## Results
@@ -45,7 +45,6 @@ If you wish to run the C++ code on it's own, run
 - **Example 1**:
 
 $f:(x,y) \mapsto e^{x+y}$, `res_x = res_y = 20` 
-
 
 ![triangulation](surface1.png)
 

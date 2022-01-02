@@ -5,7 +5,6 @@ using namespace std;
 
 void calcCoefficient(Triangle& triangle, vector<float> f, vector<float> dxf, vector<float> dyf, Coefficients& coef){
 	int j, k;
-	int id;
 
 	// a
 	for( int i = 0; i < 3; i++ ){
