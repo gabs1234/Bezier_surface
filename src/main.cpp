@@ -71,12 +71,10 @@ int main(int argc, char const *argv[]) {
 	int next_id = 0;
 	Coefficients coef; 
 	vector<float> lambda(3);
-	int counter = 0;
 	
 	for( int j = 0; j < columns; j++ ){
 		for( int i = 0; i < lines; i++ ){
-
-			counter++;	
+	
 			Point P(X[i][j], Y[i][j]);
 			// Find triangle in triangulation that contains P
 			Triangle macro_triangle = findTriangle(P, triangulation);
